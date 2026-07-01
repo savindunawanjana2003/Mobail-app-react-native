@@ -1,4 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
+import { Redirect } from "expo-router";
 import { ActivityIndicator, View } from "react-native";
 import "../global.css";
 
@@ -13,6 +14,6 @@ export default function App() {
     );
   }
 
-  // if (user) return <Redirect href={"/"} />;
-  // else return <Redirect href={"/"} />;
+  if (user) return <Redirect href={"/register"} />;
+  else return <Redirect href={"/login"} />;
 }
