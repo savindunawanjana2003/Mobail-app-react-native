@@ -2,13 +2,10 @@ import { login } from "@/service/authService";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
-  Alert,
-  Keyboard,
   Pressable,
   Text,
   TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
 } from "react-native";
 
@@ -17,22 +14,50 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    if (!email || !password) {
-      Alert.alert("Please enter email and password");
+    if (!email.trim()) {
+      alert("Please enter your email address!");
       return;
     }
+    if (!password.trim()) {
+      alert("Please enter your password!");
+      return;
+    }
+
     try {
-      await login(email, password);
-      //   router.replace("/home");
-      console.log("Login successful");
-    } catch (e) {
-      console.error(e);
-      Alert.alert("Login fail");
+      // Firebase එකට data යවනවා
+      const userCredential = await login(email, password);
+      console.log("Success! User ID:", userCredential.user.uid);
+      alert("Login Sucsessfully");
+      // user ව dashboard එකට redirect කරන්න මෙතනින්...
+    } catch (error: any) {
+      // Firebase එකෙන් එන වැරදි මෙතනින් අල්ලනවා
+      console.log("Firebase Error Code:", error.code);
+
+      switch (error.code) {
+        case "auth/invalid-email":
+          alert("ඔයා දාපු Email format එක වැරදියි! (e.g., user@gmail.com)");
+          break;
+        case "auth/invalid-credential":
+        case "auth/user-not-found":
+        case "auth/wrong-password":
+          // Security හේතු මත Firebase දැන් මේ තුනටම එවන්නේ 'invalid-credential' code එක
+          alert("ඇතුලත් කල Email එක හෝ Password එක වැරදියි!");
+          break;
+        case "auth/missing-password":
+          alert("Password එක ඇතුලත් කර නැත!");
+          break;
+        case "auth/too-many-requests":
+          alert("වැරදි password ගොඩක් ගැහුවා. ඩිංගක් වෙලා ඉඳලා try කරන්න!");
+          break;
+        default:
+          alert("An unknown error occurred: " + error.message);
+          break;
+      }
     }
   };
-
+  // onPress={Keyboard.dismiss} accessible={false}
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    <View>
       <View className="flex-1 justify-center items-center bg-gray-50 p-6">
         <View className="w-full bg-white/50 backdrop-blur-md rounded-2xl p-8 shadow-lg">
           <Text className="text-3xl font-bold mb-6 text-center text-gray-900">
@@ -70,7 +95,7 @@ const Login = () => {
           </View>
         </View>
       </View>
-    </TouchableWithoutFeedback>
+    </View>
   );
 };
 

@@ -8,7 +8,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
 } from "react-native";
 
@@ -37,9 +36,9 @@ const Register = () => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    <View >
       <View className="flex-1 justify-center items-center bg-gray-50 p-6">
-        <View className="w-full bg-white/50 backdrop-blur-md rounded-2xl p-8 shadow-lg">
+        <View className="w-full bg-white/50 rounded-2xl p-8 shadow-lg">
           <Text className="text-3xl font-bold mb-6 text-center text-gray-900">
             Register
           </Text>
@@ -91,7 +90,7 @@ const Register = () => {
           </View>
         </View>
       </View>
-    </TouchableWithoutFeedback>
+    </View>
   );
 };
 

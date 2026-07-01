@@ -14,6 +14,6 @@ export default function App() {
     );
   }
 
-  if (user) return <Redirect href={"/register"} />;
-  else return <Redirect href={"/login"} />;
+  if (user) return <Redirect href={"/login"} />;
+  else return <Redirect href={"/register"} />;
 }
