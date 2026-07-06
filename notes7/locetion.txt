@@ -53,7 +53,6 @@ export default function LocationsScreen() {
 
     if (!user?.uid) {
       Alert.alert("Error", "යූසර් හඳුනාගන්න බැහැ. කරුණාකර නැවත ලොග් වෙන්න.");
-
       return;
     }
 
@@ -82,22 +81,22 @@ export default function LocationsScreen() {
   const clickCity = async (name: string) => {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${apiKey}&units=metric`;
 
-    showLoader();
+    showLoader(); // Loader එක ඔන් කලා
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("නගරයේ දත්ත ලබාගත නොහැක.");
       }
       const data = await response.json();
-      setWeatherData(data);
-      setisShow(true);
+      setWeatherData(data); // ඩේටා ටික state එකට සෙට් කලා
+      setisShow(true); // මෝඩල් එක පෙන්වන්න හැදුවා
     } catch (error: any) {
       Alert.alert(
         "Error",
         error.message || "කාලගුණ දත්ත ලබා ගැනීමට අපොහොසත් විය.",
       );
     } finally {
-      hideLoader();
+      hideLoader(); // Loader එක ඕෆ් කලා
     }
   };
 
@@ -135,12 +134,15 @@ export default function LocationsScreen() {
             activeOpacity={1}
             onPress={clickBackGround}
           >
+            {/* 🔴 මේ TouchableWithoutFeedback එක නිසා කාඩ් එක ඇතුළ ක්ලික් කරාට මෝඩල් එක වැහෙන්නේ නැහැ */}
             <TouchableWithoutFeedback>
               <View className="w-full bg-white rounded-[32px] p-6 shadow-2xl border border-slate-100">
+                {/* නගරයේ නම පෙන්වන්න */}
                 <Text className="text-stone-700 text-lg font-bold mb-5 px-1">
                   Weather in {weatherData?.name} ({weatherData?.sys?.country})
                 </Text>
 
+                {/* Row 1 */}
                 <View className="flex-row justify-between mb-4">
                   <View className="w-[48%] flex-row items-center bg-slate-50/80 p-3 rounded-2xl border border-slate-100/50">
                     <Text className="text-3xl mr-3">🌡️</Text>

@@ -14,8 +14,8 @@ export const saveLocation = async (cityName: string, userId: string) => {
     if (!userId) throw new Error("යූසර් ලොග් වෙලා නැත!");
 
     await addDoc(collection(db, "saved_locations"), {
-      userId: userId, 
-      cityName: cityName, 
+      userId: userId,
+      cityName: cityName,
       createdAt: new Date(),
     });
 
