@@ -1,0 +1,39 @@
+import { GoogleGenAI } from "@google/generative-ai";
+
+// ⚠️ ඔයාගේ Gemini API Key එක මෙතනට දාන්න
+const API_KEY = "YOUR_GEMINI_API_KEY_HERE"; 
+const ai = new GoogleGenAI({ apiKey: API_KEY });
+
+/**
+ * AI එකෙන් පිළිතුරු ලබාගන්නා ශ්‍රිතය (Function)
+ * @param userMessage - පරිශීලකයා ඇතුළත් කරන පණිවිඩය
+ * @param chatHistory - කලින් කතා කරපු දේවල් මතක තියාගන්න (Optional)
+ */
+export const askGemini = async (userMessage: string, chatHistory: any[] = []) => {
+  try {
+    // වඩාත් වේගවත් සහ Chat සඳහා සුදුසුම gemini-2.5-flash මාදිලිය
+    const model = ai.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+    // Chat history එක සකසා ගැනීම (Gemini බලාපොරොත්තු වන format එකට)
+    const formattedHistory = chatHistory.map((msg) => ({
+      role: msg.sender === "user" ? "user" : "model",
+      parts: [{ text: msg.text }],
+    }));
+
+    // Chat එකක් ආරම්භ කිරීම
+    const chat = model.startChat({
+      history: formattedHistory,
+      generationConfig: {
+        maxOutputTokens: 1000,
+      },
+    });
+
+    const result = await chat.sendMessage(userMessage);
+    const response = await result.response;
+    
+    return response.text();
+  } catch (error) {
+    console.error("Gemini API Error:", error);
+    throw new Error("AI එකෙන් පිළිතුරක් ලබාගන්න බැරි වුණා.");
+  }
+};

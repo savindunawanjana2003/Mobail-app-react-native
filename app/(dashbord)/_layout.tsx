@@ -4,7 +4,8 @@ import { Tabs } from "expo-router";
 const layoutDashbord = () => {
   const tabs = [
     { name: "Home", title: "Home", icon: "home" },
-    { name: "locetions", title: "Locetions", icon: "locetions" },
+    { name: "locetions", title: "Locations", icon: "location" },
+    { name: "AiChatScreen", title: "AI Chat", icon: "chatbubble-ellipses" },
     { name: "profile", title: "Profile", icon: "person" },
   ];
 
