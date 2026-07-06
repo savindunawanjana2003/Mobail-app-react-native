@@ -8,6 +8,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 
@@ -35,8 +36,12 @@ const Register = () => {
     }
   };
 
+  const navigationForLogin = () => {
+    router.replace("/login");
+  };
+
   return (
-    <View >
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View className="flex-1 justify-center items-center bg-gray-50 p-6">
         <View className="w-full bg-white/50 rounded-2xl p-8 shadow-lg">
           <Text className="text-3xl font-bold mb-6 text-center text-gray-900">
@@ -85,12 +90,17 @@ const Register = () => {
                 // router.replace("/login")
               }}
             >
-              <Text className="text-blue-600 font-semibold">Login</Text>
+              <Text
+                onPress={navigationForLogin}
+                className="text-blue-600 font-semibold"
+              >
+                Login
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
