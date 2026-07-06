@@ -1,3 +1,4 @@
+import { login } from "@/service/authService";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -15,51 +16,43 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    router.replace("../(dashbord)/Home");
-    // if (!email.trim()) {
-    //   alert("Please enter your email address!");
-    //   return;
-    // }
-    // if (!password.trim()) {
-    //   alert("Please enter your password!");
-    //   return;
-    // }
+    if (!email.trim()) {
+      alert("Please enter your email address!");
+      return;
+    }
+    if (!password.trim()) {
+      alert("Please enter your password!");
+      return;
+    }
 
-    // try {
-    //   // Firebase එකට data යවනවා
-    //   const userCredential = await login(email, password);
-    //   console.log("Success! User ID:", userCredential.user.uid);
-    //   // Login වු user ව dashboard එකට redirect කරනවා
-    //   router.replace("../(dashbord)/Home");
+    try {
+      const userCredential = await login(email, password);
+      console.log("Success! User ID:", userCredential.user.uid);
+      router.replace("../(dashbord)/Home");
+    } catch (error: any) {
+      console.log("Firebase Error Code:", error.code);
 
-    //   // user ව dashboard එකට redirect කරන්න මෙතනින්...
-    // } catch (error: any) {
-    //   // Firebase එකෙන් එන වැරදි මෙතනින් අල්ලනවා
-    //   console.log("Firebase Error Code:", error.code);
-
-    //   switch (error.code) {
-    //     case "auth/invalid-email":
-    //       alert("ඔයා දාපු Email format එක වැරදියි! (e.g., user@gmail.com)");
-    //       break;
-    //     case "auth/invalid-credential":
-    //     case "auth/user-not-found":
-    //     case "auth/wrong-password":
-    //       // Security හේතු මත Firebase දැන් මේ තුනටම එවන්නේ 'invalid-credential' code එක
-    //       alert("ඇතුලත් කල Email එක හෝ Password එක වැරදියි!");
-    //       break;
-    //     case "auth/missing-password":
-    //       alert("Password එක ඇතුලත් කර නැත!");
-    //       break;
-    //     case "auth/too-many-requests":
-    //       alert("වැරදි password ගොඩක් ගැහුවා. ඩිංගක් වෙලා ඉඳලා try කරන්න!");
-    //       break;
-    //     default:
-    //       alert("An unknown error occurred: " + error.message);
-    //       break;
-    //   }
-    // }
+      switch (error.code) {
+        case "auth/invalid-email":
+          alert("ඔයා දාපු Email format එක වැරදියි! (e.g., user@gmail.com)");
+          break;
+        case "auth/invalid-credential":
+        case "auth/user-not-found":
+        case "auth/wrong-password":
+          alert("ඇතුලත් කල Email එක හෝ Password එක වැරදියි!");
+          break;
+        case "auth/missing-password":
+          alert("Password එක ඇතුලත් කර නැත!");
+          break;
+        case "auth/too-many-requests":
+          alert("වැරදි password ගොඩක් ගැහුවා. ඩිංගක් වෙලා ඉඳලා try කරන්න!");
+          break;
+        default:
+          alert("An unknown error occurred: " + error.message);
+          break;
+      }
+    }
   };
-  // onPress={Keyboard.dismiss} accessible={false}
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View className="flex-1 justify-center items-center bg-gray-50 p-6">
