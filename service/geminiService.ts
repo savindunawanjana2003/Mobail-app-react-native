@@ -1,7 +1,8 @@
 import { GoogleGenAI } from "@google/genai";
-const API_KEY = "AQ.Ab8RN6JHqYRUJfl0l_mbRzNje5Bm3WZXeCanATqIIHTUr2LRIQ";
-const ai = new GoogleGenAI({ apiKey: API_KEY });
+// const API_KEY = "AQ.Ab8RN6JHqYRUJfl0l_mbRzNje5Bm3WZXeCanATqIIHTUr2LRIQ";
+const API_KEY = process.env.EXPO_PUBLIC_GEMINI_API_KEY || "";
 
+const ai = new GoogleGenAI({ apiKey: API_KEY });
 export const askGemini = async (
   userMessage: string,
   chatHistory: any[] = [],
