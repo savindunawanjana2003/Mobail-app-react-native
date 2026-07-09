@@ -70,7 +70,7 @@ export default function AiChatScreen() {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === "android" ? "padding" : "height"}
       className="flex-1 bg-stone-100 mt-10"
     >
       {/* Header */}
@@ -123,10 +123,10 @@ export default function AiChatScreen() {
       )}
 
       {/* Input Bottom Bar */}
-      <View className="flex-row p-3 bg-white border-t border-stone-200 items-center">
+      <View className="flex-row p-3 bg-white border-t border-stone-200 items-center pb-20">
         <TextInput
-          className="flex-1 bg-stone-100 p-3 rounded-xl border border-stone-300 mr-2 text-stone-800"
-          placeholder="AI එකෙන් මොනවා හරි අහන්න..."
+          className="flex-1 h-[60px] bg-stone-100 p-3 rounded-xl border border-stone-300 mr-2 text-stone-800"
+          placeholder="Type hear...."
           value={inputText}
           onChangeText={setInputText}
           multiline

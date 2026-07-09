@@ -106,7 +106,7 @@ export default function LocationsScreen() {
   };
 
   return (
-    <View className="flex-1 bg-stone-100 p-5 mt-10">
+    <View className="flex-1  bg-blue-900 p-5 mt-10">
       <Text className="text-2xl font-bold text-blue-900 mb-4">
         Saved Locations
       </Text>
