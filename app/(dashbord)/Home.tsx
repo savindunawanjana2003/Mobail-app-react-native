@@ -139,7 +139,7 @@ export default function Home() {
             </Text>
           </View>
           <Image
-            source={require("../../assets/image/cloudLive.gif")}
+            source={require("../../assets/images/cloudLive.gif")}
             className="w-28 h-28"
             resizeMode="contain"
           />
