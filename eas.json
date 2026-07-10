@@ -1,24 +1,3 @@
-// {
-//   "cli": {
-//     "version": ">= 20.5.1",
-//     "appVersionSource": "remote"
-//   },
-//   "build": {
-//     "development": {
-//       "developmentClient": true,
-//       "distribution": "internal"
-//     },
-//     "preview": {
-//       "distribution": "internal"
-//     },
-//     "production": {
-//       "autoIncrement": true
-//     }
-//   },
-//   "submit": {
-//     "production": {}
-//   }
-// }
 {
   "cli": {
     "version": ">= 20.3.0",
@@ -43,4 +22,3 @@
     "production": {}
   }
 }
-
