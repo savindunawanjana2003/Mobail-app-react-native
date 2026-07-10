@@ -4,7 +4,7 @@
     "slug": "wether-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/image/Appicon.jpeg",
+    "icon": "./assets/images/cloud.png",
     "scheme": "wetherapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -14,7 +14,7 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/image/Appicon.jpeg"
+        "foregroundImage": "./assets/images/cloud.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
